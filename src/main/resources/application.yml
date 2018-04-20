@@ -1,0 +1,17 @@
+marklogic:
+  host: localhost
+  port: 8011
+  database: xmldb
+  user: root
+  pass: root
+
+spring:
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: hidden # Hidden in public repository.
+        password: hidden # Hidden in public repository.
+        properties:
+            mail:
+                smtp:
+                    starttls.enable: true

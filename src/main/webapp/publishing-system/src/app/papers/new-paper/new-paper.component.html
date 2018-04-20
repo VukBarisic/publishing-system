@@ -1,0 +1,18 @@
+<div class="center-large">
+  <div>
+    <button class="btn btn-primary" (click)="submit()">Submit</button>
+  </div>
+  <div>
+    <tabset>
+      <tab heading="Paper">
+        <iframe src=" assets/forms/paper-form.html " class="xonomy-form " #paperFrame (load)="loadPaper()"></iframe>
+      </tab>
+      <tab heading="Cover Letter">
+        <iframe src=" assets/forms/cover-letter-form.html " class="xonomy-form " #coverLetterFrame></iframe>
+      </tab>
+      <tab heading="Preview" (select)="getPreview()">
+        <div class="jumbotron" [innerHtml]="paperPreview | safeHtml"></div>
+      </tab>
+    </tabset>
+  </div>
+</div>

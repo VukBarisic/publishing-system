@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           targetNamespace="http://ftn.uns.ac.rs/code10/user" xmlns="http://ftn.uns.ac.rs/code10/user">
+    <xs:element name="user">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="email" type="emailAddress"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:element name="role" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="emailAddress">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z0-9!#$%&amp;'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

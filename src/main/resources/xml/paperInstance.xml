@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paper xmlns="http://ftn.uns.ac.rs/code10/paper"
+       xmlns:pp="http://ftn.uns.ac.rs/code10/paper">
+    <title>TITLE</title>
+    <authors>
+        <author username="luka">
+            <name>name0</name>
+            <institution>
+                <name>name1</name>
+                <address>address0</address>
+            </institution>
+        </author>
+        <author username="helena">
+            <name>name2</name>
+            <institution>
+                <name>name3</name>
+                <address>address1</address>
+            </institution>
+        </author>
+        <author username="nikola">
+            <name>name4</name>
+            <institution>
+                <name>name5</name>
+                <address>address2</address>
+            </institution>
+        </author>
+    </authors>
+    <abstract>
+        <purpose>purpose0</purpose>
+        <designMethodologyApproach>designMethodologyApproach0</designMethodologyApproach>
+        <findings>findings0</findings>
+        <researchLimitationsImplications>researchLimitationsImplications0</researchLimitationsImplications>
+        <practicalImplications>practicalImplications0</practicalImplications>
+        <originalityValue>originalityValue0</originalityValue>
+        <keywords>
+            <keyword>Keyword0</keyword>
+            <keyword>Keyword1</keyword>
+            <keyword>Keyword2</keyword>
+        </keywords>
+        <paperType>paperType0</paperType>
+    </abstract>
+    <section pp:id="id3">
+        <heading>heading1</heading>
+        <content>
+            <image
+                    link="http://i.dailymail.co.uk/i/pix/2016/09/06/11/37F60FD200000578-0-image-a-5_1473156426673.jpg">
+                image0
+            </image>
+            <image link="https://cdn.pixabay.com/photo/2016/10/27/22/53/heart-1776746_960_720.jpg">image1
+            </image>
+            <image link="https://www.w3schools.com/w3images/lights.jpg">image2</image>
+        </content>
+        <section pp:id="id11">
+            <heading>heading2</heading>
+            <content>
+                Some very smart scientific text nobody's gonna read anyway. Other authors also had a similar experience
+                <reference pp:refId="1"/>
+                <reference pp:refId="2"/>
+                <reference pp:refId="3"/>
+                .
+                Also, one of aforementioned authors et. al
+                <reference pp:refId="2"/>
+                has had some experience with these images.
+                <image link="https://wallpaperbrowse.com/media/images/trolltunga.jpg">image5</image>
+            </content>
+            <section pp:id="id21">
+                <heading>heading4</heading>
+                <content>
+                    Some inner content just to prove a point, exactly like they did et. al
+                    <reference pp:refId="2"/>
+                    <reference pp:refId="1"/>
+                    <reference pp:refId="3"/>
+                    .
+                </content>
+                <comment>comment0</comment>
+                <comment>comment1</comment>
+                <comment>comment2</comment>
+            </section>
+            <comment>comment0</comment>
+            <comment>comment1</comment>
+            <comment>comment2</comment>
+        </section>
+        <comment>comment3</comment>
+        <comment>comment4</comment>
+        <comment>comment5</comment>
+    </section>
+    <section pp:id="id13">
+        <heading>heading3</heading>
+        <content>
+            <image link="https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg">
+                image3
+            </image>
+            <image
+                    link="https://www.elastic.co/assets/bltada7771f270d08f6/enhanced-buzz-1492-1379411828-15.jpg">image4
+            </image>
+            <image link="https://wallpaperbrowse.com/media/images/trolltunga.jpg">image5</image>
+        </content>
+        <section pp:id="id21">
+            <heading>heading4</heading>
+            <content>
+                <reference pp:refId="2"/>
+                <reference pp:refId="1"/>
+                <reference pp:refId="3"/>
+            </content>
+            <comment>comment0</comment>
+            <comment>comment1</comment>
+            <comment>comment2</comment>
+        </section>
+        <comment>comment3</comment>
+        <comment>comment4</comment>
+        <comment>comment5</comment>
+    </section>
+    <bibliography>
+        <reference pp:id="1" pp:paperId="pp1">reference1</reference>
+        <reference pp:id="2" pp:paperId="pp2">reference2</reference>
+        <reference pp:id="3" pp:paperId="pp3">reference3</reference>
+    </bibliography>
+    <head>
+        <publishDate>2006-05-04</publishDate>
+        <revisionNumber>1</revisionNumber>
+    </head>
+    <comment>comment6</comment>
+    <comment>comment7</comment>
+    <comment>comment8</comment>
+</paper>

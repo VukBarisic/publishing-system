@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Submit paper</title>
+    <script src="../xonomy/jquery-3.3.1.min.js"></script>
+    <script src="../xonomy/xonomy.js"></script>
+    <link rel="stylesheet" type="text/css" href="../xonomy/xonomy.css">
+    <script src="util.js"></script>
+    <script type="text/javascript">
+        function start() {
+            var xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><evaluationForm xmlns=\"http://ftn.uns.ac.rs/code10/evaluation\"><originality grade=\"0\"/><keywords grade=\"0\"/><previousWork grade=\"0\"/><conclusions grade=\"0\"/><experiments grade=\"0\"/><layout grade=\"0\"/><languageStyle grade=\"0\"/><value grade=\"0\"/><figures grade=\"0\"/><references grade=\"0\"/><canBePublished grade=\"d) The article does not meet the requirements and is not suitable for publication\"/><justification>Justification for the evaluation of the paper...</justification></evaluationForm>";
+            var editor = document.getElementById("editor");
+            var docSpec = {
+                elements: {
+                    "evaluationForm": {
+                        menu: [{
+                            caption: "Add <originality>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<originality/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("originality");
+                            }
+                        }, {
+                            caption: "Add <keywords>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<keywords/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("keywords");
+                            }
+                        }, {
+                            caption: "Add <previousWork>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<previousWork/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("previousWork");
+                            }
+                        }, {
+                            caption: "Add <conclusions>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<conclusions/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("conclusions");
+                            }
+                        }, {
+                            caption: "Add <experiments>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<experiments/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("experiments");
+                            }
+                        }, {
+                            caption: "Add <layout>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<layout/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("layout");
+                            }
+                        }, {
+                            caption: "Add <languageStyle>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<languageStyle/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("languageStyle");
+                            }
+                        }, {
+                            caption: "Add <value>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<value/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("value");
+                            }
+                        }, {
+                            caption: "Add <figures>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<figures/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("figures");
+                            }
+                        }, {
+                            caption: "Add <references>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<references/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("references");
+                            }
+                        }, {
+                            caption: "Add <canBePublished>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<canBePublished/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("canBePublished");
+                            }
+                        }, {
+                            caption: "Add <justification>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<justification/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("justification");
+                            }
+                        }]
+                    },
+                    "originality": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Paper originality";
+                        }
+                    },
+                    "keywords": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Abstract, keywords, content adequacy";
+                        }
+                    },
+                    "previousWork": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Agreement with current knowledge in the field";
+                        }
+                    },
+                    "conclusions": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Conclusions correspondence to the results";
+                        }
+                    },
+                    "experiments": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Quality of experiments";
+                        }
+                    },
+                    "layout": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Paper layout";
+                        }
+                    },
+                    "languageStyle": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Language style";
+                        }
+                    },
+                    "value": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Practical and innovative value";
+                        }
+                    },
+                    "figures": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Figures, graphs and tables quality and conformity to current knowledge in the field";
+                        }
+                    },
+                    "references": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "0" },
+                                    { value: "1" },
+                                    { value: "2" },
+                                    { value: "3" },
+                                    { value: "4" },
+                                    { value: "5" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "0" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Correct reference citations";
+                        }
+                    },
+                    "canBePublished": {
+                        hasText: false,
+                        attributes: {
+                            "grade": {
+                                asker: Xonomy.askPicklist,
+                                askerParameter: [
+                                    { value: "a) In the present form" },
+                                    { value: "b) After minor corrections" },
+                                    { value: "c) After major changes or additions" },
+                                    { value: "d) The article does not meet the requirements and is not suitable for publication" }
+                                ]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @grade",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "grade", value: "d) The article does not meet the requirements and is not suitable for publication" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("grade");
+                            }
+                        }],
+                        caption: function (jsElement) {
+                            return "Whether the paper can be published";
+                        }
+                    },
+                    "justification": {
+                        hasText: true
+                    }
+                }
+            };
+            Xonomy.setMode("laic");
+            Xonomy.render(xml, editor, docSpec);
+        }
+    </script>
+</head>
+
+<body onload="start()">
+    <div id="editor"></div>
+</body>
+
+</html>

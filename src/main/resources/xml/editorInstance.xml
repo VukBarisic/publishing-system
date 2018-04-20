@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user xmlns="http://ftn.uns.ac.rs/code10/user">
+    <username>editor</username>
+    <email>email@example.com</email>
+    <password>123</password>
+    <role>EDITOR</role>
+</user>

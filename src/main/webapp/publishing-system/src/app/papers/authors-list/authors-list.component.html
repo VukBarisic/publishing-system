@@ -1,0 +1,24 @@
+<div class="center-medium">
+  <ul class="list-group">
+    <li class="list-group-item list-header">
+      <div class="row">
+        <span class="col-md-6">
+          Author's username
+        </span>
+        <span class="col-md-6">
+          Author's email
+        </span>
+      </div>
+    </li>
+    <li class="list-group-item pointer" *ngFor="let author of authors" (click)="showDetails(author)">
+      <div class="row">
+        <span class="col-md-6">
+          {{author.username}}
+        </span>
+        <span class="col-md-6">
+          {{author.email}}
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

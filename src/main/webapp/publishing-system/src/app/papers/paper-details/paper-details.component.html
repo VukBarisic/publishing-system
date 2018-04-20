@@ -1,0 +1,9 @@
+<div class="center-large">
+  <div>
+    <button class="btn btn-primary" (click)="downloadPdf()">Download PDF</button>
+    <button class="btn btn-primary" (click)="downloadXml()">Download XML</button>
+  </div>
+  <div class="jumbotron" [innerHtml]="paperHtml | safeHtml">
+  </div>
+  <button class="btn btn-danger" *ngIf="showDeleteButton" (click)="openModal()">Delete</button>
+</div>

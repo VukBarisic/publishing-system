@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Submit paper</title>
+    <script src="../xonomy/jquery-3.3.1.min.js"></script>
+    <script src="../xonomy/xonomy.js"></script>
+    <link rel="stylesheet" type="text/css" href="../xonomy/xonomy.css">
+    <script src="util.js"></script>
+    <script type="text/javascript">
+        function start() {
+            var xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><coverLetter xmlns=\"http://ftn.uns.ac.rs/code10/cover\"><date>" + getDate() + "</date><text>Write your cover leter here...</text></coverLetter>";
+            var editor = document.getElementById("editor");
+            var docSpec = {
+                elements: {
+                    "coverLetter": {
+                        menu: [{
+                            caption: "Add <date>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<date/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("date");
+                            }
+                        }, {
+                            caption: "Add <text>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<text/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("text");
+                            }
+                        }]
+                    },
+                    "date": {
+                        hasText: true
+                    },
+                    "text": {
+                        hasText: true
+                    }
+                }
+            };
+            Xonomy.setMode("laic");
+            Xonomy.render(xml, editor, docSpec);
+        }
+    </script>
+</head>
+
+<body onload="start()">
+    <div id="editor"></div>
+</body>
+
+</html>

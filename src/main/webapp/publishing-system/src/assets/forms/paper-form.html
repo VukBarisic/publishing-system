@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Submit paper</title>
+    <script src="../xonomy/jquery-3.3.1.min.js"></script>
+    <script src="../xonomy/xonomy.js"></script>
+    <link rel="stylesheet" type="text/css" href="../xonomy/xonomy.css">
+    <script src="util.js"></script>
+    <script type="text/javascript">
+        function start(filledXml) {
+            var xml = "<paper xmlns='http://ftn.uns.ac.rs/code10/paper' xmlns:pp='http://ftn.uns.ac.rs/code10/paper'><head><publishDate >2018-02-10</publishDate><revisionNumber >1</revisionNumber></head><title >Your Paper Title</title><authors><author username='Author&apos;s Publishing System username...'><name >Author&apos;s name</name><institution><name >Institution name</name><address >Institution address</address></institution></author></authors><abstract><purpose >Purpose... (you can remove this)</purpose><designMethodologyApproach >Design methodology and approach... (you can remove this)</designMethodologyApproach><findings >Findings... (you can remove this)</findings><researchLimitationsImplications >Research limitations and implications... (you can remove this)</researchLimitationsImplications><practicalImplications >Practical implications... (you can remove this)</practicalImplications><originalityValue >Originality value... (you can remove this)</originalityValue><keywords><keyword >keyword1</keyword><keyword >keyword2</keyword></keywords><paperType >Paper type...</paperType></abstract><section pp:id='First section ID... (required, must be unique)'><heading >Section Heading...</heading><content >Section content...</content><section pp:id='Second section ID... (required, must be unique)'><heading >Subsection Heading...</heading><content >Subsection content...</content></section></section><bibliography><reference pp:id='ID for referencing in text...' pp:paperId='ID of referenced paper...'>Citation...</reference><reference pp:id='ID for referencing in text...' pp:paperId='ID of referenced paper...'>Citation...</reference></bibliography></paper>";
+            if (arguments.length > 0) {
+                xml = filledXml;
+            }
+            var editor = document.getElementById("editor");
+            var docSpec = {
+                elements: {
+                    "paper": {
+                        menu: [{
+                            caption: "Add <head>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<head/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("head");
+                            }
+                        }, {
+                            caption: "Add <title>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<title/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("title");
+                            }
+                        }, {
+                            caption: "Add <authors>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<authors/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("authors");
+                            }
+                        }, {
+                            caption: "Add <abstract>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<abstract/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("abstract");
+                            }
+                        }, {
+                            caption: "Add <section>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<section/>"
+                        }, {
+                            caption: "Add <bibliography>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<bibliography/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("bibliography");
+                            }
+                        }]
+                    },
+                    "head": {
+                        mustBeBefore: ["title", "authors", "abstract", "section", "bibliography"],
+                        menu: [{
+                            caption: "Add <publishDate>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<publishDate>" + getDate() + "</publishDate>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("publishDate");
+                            }
+                        }, {
+                            caption: "Add <revisionNumber>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<revisionNumber/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("revisionNumber");
+                            }
+                        }]
+                    },
+                    "publishDate": {
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteAttribute
+                        }]
+                    },
+                    "revisionNumber": {
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteAttribute
+                        }]
+                    },
+                    "title": {
+                        mustBeBefore: ["authors", "abstract", "section", "bibliography"],
+                        mustBeAfter: ["head"],
+                        hasText: true
+                    },
+                    "authors": {
+                        mustBeAfter: ["head", "title"],
+                        mustBeBefore: ["abstract", "section", "bibliography"],
+                        menu: [{
+                            caption: "Add <author>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<author/>"
+                        }]
+                    },
+                    "author": {
+                        canDropTo: ["authors"],
+                        attributes: {
+                            "username": {
+                                asker: Xonomy.askString,
+                                menu: [{
+                                    caption: "Remove",
+                                    action: Xonomy.deleteAttribute
+                                }]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @username",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "username", value: "Author's Publishing System username..." },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("username");
+                            }
+                        }, {
+                            caption: "Add <name>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<name/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("name");
+                            }
+                        }, {
+                            caption: "Add <institution>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<institution/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("institution");
+                            }
+                        }, {
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "institution": {
+                        mustBeAfter: ["name"],
+                        menu: [{
+                            caption: "Add <name>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<name/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("name");
+                            }
+                        }, {
+                            caption: "Add <address>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<address/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("address");
+                            }
+                        }]
+                    },
+                    "name": {
+                        mustBeBefore: ["institution"],
+                        hasText: true
+                    },
+                    "address": {
+                        hasText: true
+                    },
+                    "abstract": {
+                        mustBeAfter: ["head", "title", "authors"],
+                        mustBeBefore: ["section", "bibliography"],
+                        menu: [{
+                            caption: "Add <purpose>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<purpose/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("purpose");
+                            }
+                        }, {
+                            caption: "Add <designMethodologyApproach>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<designMethodologyApproach/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("designMethodologyApproach");
+                            }
+                        }, {
+                            caption: "Add <findings>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<findings/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("findings");
+                            }
+                        }, {
+                            caption: "Add <researchLimitationsImplications>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<researchLimitationsImplications/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("researchLimitationsImplications");
+                            }
+                        }, {
+                            caption: "Add <practicalImplications>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<practicalImplications/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("practicalImplications");
+                            }
+                        }, {
+                            caption: "Add <originalityValue>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<originalityValue/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("originalityValue");
+                            }
+                        }, {
+                            caption: "Add <keywords>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<keywords/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("keywords");
+                            }
+                        }, {
+                            caption: "Add <paperType>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<paperType/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("paperType");
+                            }
+                        }]
+                    },
+                    "purpose": {
+                        mustBeBefore: ["designMethodologyApproach", "findings", "researchLimitationsImplications", "practicalImplications", "originalityValue", "keywords", "paperType"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "designMethodologyApproach": {
+                        mustBeAfter: ["purpose"],
+                        mustBeBefore: ["findings", "researchLimitationsImplications", "practicalImplications", "originalityValue", "keywords", "paperType"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "findings": {
+                        mustBeAfter: ["purpose", "designMethodologyApproach"],
+                        mustBeBefore: ["researchLimitationsImplications", "practicalImplications", "originalityValue", "keywords", "paperType"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "researchLimitationsImplications": {
+                        mustBeAfter: ["purpose", "designMethodologyApproach", "findings"],
+                        mustBeBefore: ["practicalImplications", "originalityValue", "keywords", "paperType"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "practicalImplications": {
+                        mustBeAfter: ["purpose", "designMethodologyApproach", "findings", "researchLimitationsImplications"],
+                        mustBeBefore: ["originalityValue", "keywords", "paperType"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "originalityValue": {
+                        mustBeAfter: ["purpose", "designMethodologyApproach", "findings", "researchLimitationsImplications", "practicalImplications"],
+                        mustBeBefore: ["keywords", "paperType"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "keywords": {
+                        mustBeAfter: ["purpose", "designMethodologyApproach", "findings", "researchLimitationsImplications", "practicalImplications", "originalityValue"],
+                        mustBeBefore: ["paperType"],
+                        menu: [{
+                            caption: "Add <keyword>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<keyword/>"
+                        }]
+                    },
+                    "keyword": {
+                        hasText: true,
+                        canDropTo: ["keywords"],
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "paperType": {
+                        mustBeAfter: ["purpose", "designMethodologyApproach", "findings", "researchLimitationsImplications", "practicalImplications", "originalityValue", "keywords"],
+                        hasText: true
+                    },
+                    "section": {
+                        mustBeAfter: ["head", "title", "authors", "abstract"],
+                        mustBeBefore: ["bibliography"],
+                        canDropTo: ["section"],
+                        attributes: {
+                            "id": {
+                                asker: Xonomy.askString
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @id",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "id", value: "Section ID... (required, must be unique)" },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("id");
+                            }
+                        }, {
+                            caption: "Add <heading>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<heading/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("heading");
+                            }
+                        }, {
+                            caption: "Add <content>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<content/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("content");
+                            }
+                        }, {
+                            caption: "Add <subsection>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<section/>"
+                        }, {
+                            caption: "Add <section> before this",
+                            action: Xonomy.newElementBefore,
+                            actionParameter: "<section/>"
+                        }, {
+                            caption: "Add <section> after this",
+                            action: Xonomy.newElementAfter,
+                            actionParameter: "<section/>"
+                        }, {
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "heading": {
+                        mustBeBefore: ["content"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "content": {
+                        mustBeAfter: ["heading"],
+                        hasText: true,
+                        menu: [{
+                            caption: "Add <image>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<image/>"
+                        }, {
+                            caption: "Add <reference>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<reference/>"
+                        }, {
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "image": {
+                        hasText: true,
+                        attributes: {
+                            "link": {
+                                asker: Xonomy.askString
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @link to image",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "link", value: "Link to image..." },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("image");
+                            }
+                        }, {
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "reference": {
+                        hasText: function (jsElement) {
+                            return jsElement.parent().name === "bibliography";
+                        },
+                        attributes: {
+                            "pp:refId": {
+                                asker: Xonomy.askString,
+                                menu: [{
+                                    caption: "Remove",
+                                    action: Xonomy.deleteAttribute
+                                }]
+                            },
+                            "pp:id": {
+                                asker: Xonomy.askString,
+                                menu: [{
+                                    caption: "Remove",
+                                    action: Xonomy.deleteAttribute
+                                }]
+                            },
+                            "pp:paperId": {
+                                asker: Xonomy.askString,
+                                menu: [{
+                                    caption: "Remove",
+                                    action: Xonomy.deleteAttribute
+                                }]
+                            }
+                        },
+                        menu: [{
+                            caption: "Add @refId",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "pp:refId", value: "ID of bibliography reference..." },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("pp:refId") || jsElement.parent().name !== "content";
+                            }
+                        }, {
+                            caption: "Add @id",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "pp:id", value: "ID for referencing in text..." },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("pp:id") || jsElement.parent().name !== "bibliography";
+                            }
+                        }, {
+                            caption: "Add @paperId",
+                            action: Xonomy.newAttribute,
+                            actionParameter: { name: "pp:paperId", value: "ID of referenced paper..." },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("pp:paperId") || jsElement.parent().name !== "bibliography";
+                            }
+                        }, {
+                            caption: "Remove",
+                            action: Xonomy.deleteElement
+                        }]
+                    },
+                    "bibliography": {
+                        mustBeAfter: ["title, authors, abstract, section"],
+                        menu: [{
+                            caption: "Add <reference>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<reference/>"
+                        }]
+                    }
+                }
+            };
+            Xonomy.setMode("laic");
+            Xonomy.render(xml, editor, docSpec);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="editor"></div>
+</body>
+
+</html>

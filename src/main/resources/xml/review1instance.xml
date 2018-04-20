@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<review:review xmlns:review="http://ftn.uns.ac.rs/code10/review"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ftn.uns.ac.rs/code10/review file:/E:/dev/ij_ws/publishing-system/src/main/resources/xsd/review.xsd"
+               paperId="500f0cc0-2088-4f83-ba63-c70e2186109b"
+               author="helena">
+    <review:comment refId="id3">helena1</review:comment>
+    <review:comment refId="id3">helena2</review:comment>
+    <review:comment refId="id11">helena3</review:comment>
+</review:review>

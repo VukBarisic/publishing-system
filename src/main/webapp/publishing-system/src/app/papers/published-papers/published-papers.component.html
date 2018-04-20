@@ -1,0 +1,36 @@
+<div class="center-medium">
+  <div class="row mb-3">
+    <div class="col-md-10">
+      <div *ngIf="authenticated()">
+        <input name="options" ng-control="options" type="radio" [value]="false" [(ngModel)]="mine"> Published
+        <br/>
+        <input name="options" ng-control="options" type="radio" [value]="true" [(ngModel)]="mine"> Mine
+        <br/>
+      </div>
+    </div>
+    <div class="col-md">
+      <button class="btn btn-lg btn-primary btn-block" (click)="showAll()">Find all</button>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col-md-12" (ngSubmit)="textSearch()" #textForm="ngForm">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="text" placeholder="Text search" name="textSearch" required>
+        <div class="input-group-append">
+          <button [disabled]="textForm.form.invalid" class="btn btn-lg btn-primary btn-block" type="sumbit">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <form class="col-md-12" (ngSubmit)="metadataSearch()" #metadataForm="ngForm">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="metadata" placeholder="Metadata search" name="metadataSearch" required>
+        <div class="input-group-append">
+          <button [disabled]="metadataForm.form.invalid" class="btn btn-lg btn-primary btn-block" type="sumbit">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ps-paper-list [papers]="papers" [state]="'authors'"></ps-paper-list>
+</div>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           targetNamespace="http://ftn.uns.ac.rs/code10/paper" xmlns="http://ftn.uns.ac.rs/code10/paper">
+    <xs:element name="paper">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="head" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="publishDate" type="xs:date" minOccurs="0"/>
+                            <xs:element name="revisionNumber" type="xs:string" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="title"/>
+                <xs:element name="authors" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" ref="author"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="abstract">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="purpose" type="xs:string"/>
+                            <xs:element name="designMethodologyApproach" type="xs:string"/>
+                            <xs:element name="findings" type="xs:string"/>
+                            <xs:element name="researchLimitationsImplications" type="xs:string"/>
+                            <xs:element name="practicalImplications" type="xs:string"/>
+                            <xs:element name="originalityValue" type="xs:string"/>
+                            <xs:element name="keywords">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="keyword"
+                                                    type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="paperType" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="section" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="bibliography">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="reference">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute ref="id"/>
+                                            <xs:attribute ref="paperId"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="comment"/>
+            </xs:sequence>
+            <xs:attribute ref="id"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="section">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="heading"/>
+                <xs:element ref="content"/>
+                <xs:element ref="section" minOccurs="0"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="comment"/>
+            </xs:sequence>
+            <xs:attribute ref="id"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attribute name="paperId" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="refId" type="xs:string"/>
+    <xs:element name="title" type="xs:string"/>
+    <xs:element name="heading" type="xs:string"/>
+    <xs:element name="author" type="Author"/>
+    <xs:complexType name="Author">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="institution">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="address" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="username" type="xs:string"/>
+    </xs:complexType>
+    <xs:element name="content">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element ref="image"/>
+                <xs:element ref="reference"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="image">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="link" type="xs:string"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="reference">
+        <xs:complexType>
+            <xs:attribute ref="refId"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="comment" type="xs:string"/>
+</xs:schema>

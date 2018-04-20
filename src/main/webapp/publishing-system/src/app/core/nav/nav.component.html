@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Publishing System</a>
+  <button (click)="isCollapsed = !isCollapsed" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/papers">Search</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/authors">Authors</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthor()">
+        <a class="nav-link" (click)="me()">Me</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthor()">
+        <a class="nav-link" routerLink="/papers/new">Submit</a>
+      </li>
+      <li class="nav-item" *ngIf="isEditor()">
+        <a class="nav-link" routerLink="/papers/submitted">Submitted papers</a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isAuthor()" dropdown>
+        <a class="nav-link dropdown-toggle" href dropdownToggle (click)="false" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Reviews
+        </a>
+        <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" routerLink="/papers/assigned">Assigned papers</a>
+          <a class="dropdown-item" routerLink="/papers/accepted">Accepted papers</a>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" *ngIf="!isAuthenticated()">
+        <a class="nav-link" routerLink="/signup">Signup</a>
+      </li>
+      <li class="nav-item" *ngIf="!isAuthenticated()">
+        <a class="nav-link" routerLink="/signin">Signin</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated()" id="signoutButton">
+        <a class="nav-link" (click)="signout()">Sign out</a>
+      </li>
+    </ul>
+  </div>
+</nav>

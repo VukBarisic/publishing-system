@@ -1,0 +1,75 @@
+<div class="center-large">
+  <div>
+    <button class="btn btn-primary" (click)="respond(true)">Publish</button>
+    <button class="btn btn-primary" (click)="respond(false)">Reject</button>
+    <button class="btn btn-primary" *ngIf="checkIfReviewed()" (click)="groupReview()">Group review</button>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Assigned Reviewers</h2>
+      <ul class="list-group">
+        <li class="list-group-item list-header">
+          <div class="row">
+            <span class="col-md-4">
+              Reviewer's username
+            </span>
+            <span class="col-md-4">
+              Reviewer's email
+            </span>
+            <span class="col-md-2">
+              Reviewer's status
+            </span>
+          </div>
+        </li>
+        <li class="list-group-item pointer" *ngFor="let reviewer of reviewers" (click)="showDetails(author)">
+          <div class="row">
+            <span class="col-md-4">
+              {{reviewer.username}}
+            </span>
+            <span class="col-md-4">
+              {{reviewer.email}}
+            </span>
+            <span class="col-md-4">
+              {{reviewer.reviewerStatus}}
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Suggested Reviewers</h2>
+      <ul class="list-group">
+        <li class="list-group-item list-header">
+          <div class="row">
+            <span class="col-md-4">
+              Reviewer's username
+            </span>
+            <span class="col-md-4">
+              Reviewer's email
+            </span>
+            <span class="col-md-2">
+              Reviewer's score
+            </span>
+          </div>
+        </li>
+        <li class="list-group-item pointer" *ngFor="let author of suggestedAuthors" (click)="showDetails(author)">
+          <div class="row">
+            <span class="col-md-4">
+              {{author.username}}
+            </span>
+            <span class="col-md-4">
+              {{author.email}}
+            </span>
+            <span class="col-md-2">
+              {{author.score}}
+            </span>
+            <span class="col-md-2">
+              <button class="btn btn-primary" (click)="addReviewer(author)">Assign</button>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

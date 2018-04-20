@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Submit paper</title>
+    <script src="../xonomy/jquery-3.3.1.min.js"></script>
+    <script src="../xonomy/xonomy.js"></script>
+    <link rel="stylesheet" type="text/css" href="../xonomy/xonomy.css">
+    <script src="util.js"></script>
+    <script type="text/javascript">
+        function start(xml) {
+            var editor = document.getElementById("editor");
+            var docSpec = {
+                elements: {
+                    "paper": {
+                        menu: [{
+                            caption: "Add <comment>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<comment/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("comment");
+                            }
+                        }]
+                    },
+                    "head": {
+                        isReadOnly: true
+                    },
+                    "publishDate": {
+                        isReadOnly: true
+                    },
+                    "revisionNumber": {
+                        isReadOnly: true
+                    },
+                    "title": {
+                        isReadOnly: true
+                    },
+                    "authors": {
+                        isReadOnly: true
+                    },
+                    "author": {
+                        isReadOnly: true
+                    },
+                    "institution": {
+                        isReadOnly: true
+                    },
+                    "name": {
+                        isReadOnly: true
+                    },
+                    "address": {
+                        isReadOnly: true
+                    },
+                    "abstract": {
+                        isReadOnly: true
+                    },
+                    "purpose": {
+                        isReadOnly: true
+                    },
+                    "designMethodologyApproach": {
+                        isReadOnly: true
+                    },
+                    "findings": {
+                        isReadOnly: true
+                    },
+                    "researchLimitationsImplications": {
+                        isReadOnly: true
+                    },
+                    "practicalImplications": {
+                        isReadOnly: true
+                    },
+                    "originalityValue": {
+                        isReadOnly: true
+                    },
+                    "keywords": {
+                        isReadOnly: true
+                    },
+                    "keyword": {
+                        isReadOnly: true
+                    },
+                    "paperType": {
+                        isReadOnly: true
+                    },
+                    "section": {
+                        menu: [{
+                            caption: "Add <comment>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<comment/>",
+                            hideIf: function (jsElement) {
+                                return jsElement.hasChildElement("comment");
+                            }
+                        }]
+                    },
+                    "heading": {
+                        isReadOnly: true
+                    },
+                    "content": {
+                        isReadOnly: true
+                    },
+                    "image": {
+                        isReadOnly: true
+                    },
+                    "reference": {
+                        isReadOnly: true
+                    },
+                    "bibliography": {
+                        isReadOnly: true
+                    },
+                    "comment": {
+                        hasText: true,
+                        menu: [{
+                            caption: "Remove",
+                            action: Xonomy.deleteAttribute
+                        }]
+                    }
+                }
+            };
+            Xonomy.setMode("laic");
+            Xonomy.render(xml, editor, docSpec);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="editor"></div>
+</body>
+
+</html>

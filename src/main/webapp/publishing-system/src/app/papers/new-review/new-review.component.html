@@ -1,0 +1,18 @@
+<div class="center-large">
+  <div>
+    <button class="btn btn-primary" (click)="submit()">Submit</button>
+  </div>
+  <div>
+    <tabset>
+      <tab heading="Review">
+        <iframe src=" assets/forms/review-form.html " class="xonomy-form " #reviewFrame (load)="loadPaper()"></iframe>
+      </tab>
+      <tab heading=" Evaluation form ">
+        <iframe src=" assets/forms/evaluation-form.html " class="xonomy-form " #evaluationFrame></iframe>
+      </tab>
+      <tab heading="Preview " (select)="getPreview() ">
+        <div class="jumbotron " [innerHtml]="paperPreview | safeHtml "></div>
+      </tab>
+    </tabset>
+  </div>
+</div>
